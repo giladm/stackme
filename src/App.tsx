@@ -1,14 +1,17 @@
 // StackMe
-// A home excersie for Cyrus
+// A home excersie 
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import { MainScreen } from './screens/MainScreen';
+import { ThemeContext } from './types/ThemeContext';
+import { ThemeLogic } from './types/ThemeLogic';
+
 
 export default function App() {
+
+  const theme = ThemeLogic(); // initilize the context
+
   return (
-    <Provider store={store}>
-      <MainScreen />
-    </Provider>
-  );
+    <ThemeContext.Provider value={theme}>
+        <MainScreen />
+    </ThemeContext.Provider>  );
 }
