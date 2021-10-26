@@ -1,15 +1,15 @@
 //StackUserInput - control light/dark mode
 import React, { useContext, useState } from 'react';
-import { AppStateAction, AppStateValue, ThemeContext, ThemeContextType } from '../types/ThemeContext';
+import { AppStateAction, AppStateValue, AppStateContext, ThemeContextType } from '../types/AppStateContext';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { logger } from "react-native-logs";
 
-export const StackUserInput =() =>{
+export const StackUserInput = () => {
   const console = logger.createLogger({
-    levels: { log: 0, warn: 2, error: 3 }, transportOptions: {colors: "ansi"}
+    levels: { log: 0, warn: 2, error: 3 }, transportOptions: { colors: "ansi" }
   });
-  const appContext: ThemeContextType = useContext(ThemeContext);
+  const appContext: ThemeContextType = useContext(AppStateContext);
   const darkMode: boolean = appContext.themeMode === AppStateValue.DARK;
   const [userId, setUserId] = useState('');
 
@@ -23,8 +23,8 @@ export const StackUserInput =() =>{
   };
 
   const processUserInput = () => {
-    console.log('>> update Slack user ID', userId);
-    appContext.changeAppState(AppStateAction.ChangeUser, userId)
+    console.log('>> update Slack user ID[' + userId.trim() + ']');
+    appContext.changeAppState(AppStateAction.ChangeUser, userId.trim());
   };
 
   return (
@@ -34,8 +34,8 @@ export const StackUserInput =() =>{
         { color: darkMode ? Colors.dark_text : Colors.light_text }]}>
           Get Stack Overflow Posts</Text>
         <TextInput style={[styles.inputText,
-          { color: darkMode ? Colors.dark_text : Colors.light_text },
-          { backgroundColor: !darkMode ? Colors.dark_text : 'gray' },
+        { color: darkMode ? Colors.dark_text : Colors.light_text },
+        { backgroundColor: !darkMode ? Colors.dark_text : 'gray' },
         ]}
           onChangeText={(text) => onChangeInput(text)}
           value={userId}
@@ -52,7 +52,7 @@ export const StackUserInput =() =>{
 
 const styles = StyleSheet.create({
   useridView: {
-    alignItems: 'center' ,
+    alignItems: 'center',
     flexDirection: 'column',
     paddingBottom: 5,
   },

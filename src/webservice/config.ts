@@ -1,9 +1,10 @@
-// config https://api.stackexchange.com/2.3/users/517757?site=stackoverflow
+// config
+// ./2.3/users/{517757}/questions?order=desc&sort=activity&site=stackoverflow
 const host = 'api.stackexchange.com/2.3/users';
-const site = 'stackoverflow.com';
+const suffix = '/questions?order=desc&sort=activity&site=stackoverflow';
 const baseUrl = `https://${host}/`;
 
 export default {
   baseUrl,
-  site,
+  suffix,
 };

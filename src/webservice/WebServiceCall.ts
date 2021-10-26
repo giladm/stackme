@@ -1,5 +1,6 @@
-// Handels all WebService calls
+// Handels REST API WebService calls
 import AppConfig from './config';
+import { Stackoverflow } from '../types/StackJsonInterface';
 import { logger } from "react-native-logs";
 
 const console = logger.createLogger({
@@ -8,12 +9,11 @@ const console = logger.createLogger({
   }
 });
 
-// General purpose webservice api base on target URL, payload for POST method
-// https://api.stackexchange.com/2.3/users/517757?site=stackoverflow
-export const getWebserviceURL = ( userId:string): Promise<[]> => {
-  const targetURL = AppConfig.baseUrl+userId+'?site='+AppConfig.site;
+// URL format: ./2.3/users/{userId}/questions?order=desc&sort=activity&site=stackoverflow
+export const getWebserviceURL = (userId: string): Promise<Stackoverflow> => {
+  const targetURL = AppConfig.baseUrl + userId + AppConfig.suffix;
   console.log('targetURL: ', targetURL);
-  var keepResponse: any, responseStatus:any;
+  var keepResponse: any, responseStatus: any;
   return new Promise((resolve, reject) => {
     try {
       fetch(targetURL, {
@@ -22,28 +22,26 @@ export const getWebserviceURL = ( userId:string): Promise<[]> => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: '', 
+        body: '',
       })
-        .then(function(response) {
-          console.log('* * * response status:',response.status);
-          if (!response.ok ) {
-            console.error('Error in webservice call. status:',response.status);
-            reject (response.status+' '+response.statusText)
-          } else { responseStatus =response.status;}
-         return (response.json());
+        .then(function (response) {
+          console.log('* * * response status:', response.status);
+          if (!response.ok) {
+            console.error('Error in webservice call. status:', response.status);
+            reject(response.status + ' ' + response.statusText)
+          } else { responseStatus = response.status; }
+          return (response.json());
         })
         .then((response) => {
           keepResponse = response;
-          // console.log('Response:>>', response,'<<<');
         })
         .then(() => {
           try {
-            // console.log('typeof response: ', typeof keepResponse);//,'>>', keepResponse,'<<');
             if (typeof keepResponse === 'object') {
               resolve(keepResponse)
               return;
             }
-            const parsedJson = JSON.parse(keepResponse);
+            const parsedJson: Stackoverflow = JSON.parse(keepResponse);
             console.log('JSON parse success for request URL:', AppConfig.baseUrl + targetURL);
             resolve(parsedJson);
           } catch {

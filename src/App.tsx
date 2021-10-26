@@ -1,17 +1,18 @@
 // StackMe
-// A home excersie 
+// Get Stackoverflow Posts based on userId using Stack REST API
+//
 import React from 'react';
 import { MainScreen } from './screens/MainScreen';
-import { ThemeContext } from './types/ThemeContext';
-import { ThemeLogic } from './types/ThemeLogic';
+import { AppStateContext } from './types/AppStateContext';
+import { AppStateLogic } from './types/AppStateLogic';
 
 
 export default function App() {
 
-  const theme = ThemeLogic(); // initilize the context
+  const appState = AppStateLogic(); // initilize the context
 
   return (
-    <ThemeContext.Provider value={theme}>
-        <MainScreen />
-    </ThemeContext.Provider>  );
+    <AppStateContext.Provider value={appState}>
+      <MainScreen />
+    </AppStateContext.Provider>);
 }

@@ -14,7 +14,10 @@
     "react": "17.0.2",
     "react-native": "0.66.0",
     "react-native-elements": "^3.4.2",
+    "react-native-indicators": "^0.17.0",
     "react-native-logs": "^3.0.4",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-webview": "^11.14.1",
     "react-redux": "^7.2.5",
     "redux-persist": "^6.0.0"
   },

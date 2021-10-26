@@ -1,5 +1,5 @@
 export enum Colors {
-  primary = '#2e3f9d',
+  primary = 'gray', //'#2e3f9d',
   light_background_color = 'white',
   dark_background_color = 'black',
   light_text = 'black',

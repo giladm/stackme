@@ -1,15 +1,14 @@
-// SortQuestions
+// SortQuestionsInput
 import React, { useState, useContext } from 'react';
 import { ButtonGroup } from 'react-native-elements';
 import { View, Text, StyleSheet } from 'react-native';
-import { AppStateAction, AppStateValue, ThemeContext, ThemeContextType } from '../types/ThemeContext';
+import { AppStateAction, AppStateValue, AppStateContext, ThemeContextType } from '../types/AppStateContext';
 
-export const SortQuestions = () => {
+export const SortQuestionsInput = () => {
 
   const buttons = ['Date', 'Answers', 'Views'];
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const appContext: ThemeContextType = useContext(ThemeContext);
-  // const contextSelectedIndex: AppStateValue = appContext.sortMode;
+  const appContext: ThemeContextType = useContext(AppStateContext);
 
   const updateIndex = (index) => {
     var newContextIndex: AppStateValue;
@@ -75,4 +74,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-// export default SortQuestions;
+// export default SortQuestionsInput;

@@ -1,6 +1,6 @@
 //ThemedButton - control light/dark mode
 import React, { useContext } from 'react';
-import { AppStateAction, AppStateValue, ThemeContext, ThemeContextType } from '../types/ThemeContext';
+import { AppStateAction, AppStateValue, AppStateContext, ThemeContextType } from '../types/AppStateContext';
 import {View, Text, StyleSheet, Switch } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { logger } from "react-native-logs";
@@ -10,7 +10,7 @@ export const ThemedButton =() =>{
   const console = logger.createLogger({
     levels: { log: 0, warn: 2, error: 3 }, transportOptions: {colors: "ansi"}
   });
-  const appContext: ThemeContextType = useContext(ThemeContext);
+  const appContext: ThemeContextType = useContext(AppStateContext);
   const darkMode: boolean = appContext.themeMode === AppStateValue.DARK;
   const toggleSwitch = () => {
     console.log('****** toggle darkMode:', darkMode);
